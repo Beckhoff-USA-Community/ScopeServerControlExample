@@ -6,7 +6,7 @@
     <Node>
       <Title>TemplateForPLC</Title>
       <Expanded>True</Expanded>
-      <FileName>C:\Users\Matt\source\repos\ScopeServerDemo\TwinCAT Measurement Project\TemplateForPLC.tcscopex</FileName>
+      <FileName>C:\Users\Matt\source\repos\ScopeServerControlExample\ScopeServerDemo\TwinCAT Measurement Project\TemplateForPLC.tcscopex</FileName>
       <Children>
         <Node>
           <Title>DataPool</Title>
@@ -35,7 +35,7 @@
         </Node>
         <Node>
           <Title>YT Chart</Title>
-          <Expanded>False</Expanded>
+          <Expanded>True</Expanded>
           <FileName></FileName>
           <Children>
             <Node>

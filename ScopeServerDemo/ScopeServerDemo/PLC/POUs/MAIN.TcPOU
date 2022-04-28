@@ -14,7 +14,7 @@ VAR
 	iScopeErrorID		:UDINT;
 	
 	
-	fbExportToCSV		:FB_ExportScopeDataToCSV;
+	fbExportToCSV		:FB_ExportScopeData;
 	xExport				:BOOL;
 	xExportBusy			:BOOL;
 	xExportError		:BOOL;
@@ -41,8 +41,9 @@ fbScopeServer(
 fbExportToCSV(
 	sNetId					:='' , 
 	bExport					:=xExport , 
-	sSVDXFilePath			:=fbScopeServer.sSaveFile , 
-	sPathToNewCSV			:='C:\Scope\CSV\Record1.CSV' , 
+	svd						:=fbScopeServer.sSaveFile , 
+	target					:='C:\Scope\CSV\Record1.CSV' , 
+	config					:='C:\Scope\Templates\ScopeExporterSettings.xml',
 	bBusy					=>xExportBusy , 
 	bError					=>xExportError , 
 	iErrorID				=>iExportErrorID );	]]></ST>

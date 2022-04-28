@@ -22,7 +22,7 @@
     <Compile Include="PlcTask.TcTTO">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\FB_ExportScopeDataToCSV.TcPOU">
+    <Compile Include="POUs\FB_ExportScopeData.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\FB_ScopeServerSample.TcPOU">

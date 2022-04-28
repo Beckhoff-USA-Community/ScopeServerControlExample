@@ -77,11 +77,11 @@
           <DataType>REAL64</DataType>
           <DisplayColor>Black</DisplayColor>
           <Enabled>true</Enabled>
-          <FileHandle>0</FileHandle>
+          <FileHandle>1</FileHandle>
           <ForceOversampling>false</ForceOversampling>
           <Guid>51b75d63-74dc-4f11-8a45-6c2c91a79827</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>385696</IndexOffset>
+          <IndexOffset>386384</IndexOffset>
           <IsHistorical>false</IsHistorical>
           <Name>Sinus_Fast</Name>
           <Oversample>0</Oversample>
@@ -159,11 +159,11 @@
           <DataType>REAL64</DataType>
           <DisplayColor>Black</DisplayColor>
           <Enabled>true</Enabled>
-          <FileHandle>0</FileHandle>
+          <FileHandle>2</FileHandle>
           <ForceOversampling>false</ForceOversampling>
           <Guid>4e2f0b7d-d055-4937-b8b8-100e1280be8e</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>385728</IndexOffset>
+          <IndexOffset>386416</IndexOffset>
           <IsHistorical>false</IsHistorical>
           <Name>Sinus_SqFast</Name>
           <Oversample>0</Oversample>
@@ -241,11 +241,11 @@
           <DataType>BIT</DataType>
           <DisplayColor>Black</DisplayColor>
           <Enabled>true</Enabled>
-          <FileHandle>0</FileHandle>
+          <FileHandle>3</FileHandle>
           <ForceOversampling>false</ForceOversampling>
           <Guid>29d7b751-6d36-46a3-b249-de374adda8ee</Guid>
           <IndexGroup>16448</IndexGroup>
-          <IndexOffset>386335</IndexOffset>
+          <IndexOffset>387023</IndexOffset>
           <IsHistorical>false</IsHistorical>
           <Name>bBlue</Name>
           <Oversample>0</Oversample>

@@ -1,17 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
-  <POU Name="FB_ExportScopeDataToCSV" Id="{d39ca1ac-6eac-4c50-b833-8978ee8dc99a}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK FB_ExportScopeDataToCSV
+  <POU Name="FB_ExportScopeData" Id="{d39ca1ac-6eac-4c50-b833-8978ee8dc99a}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_ExportScopeData
 VAR_INPUT
-	sNetId			: STRING	:='';	
+	sNetId			:STRING	:='';	
 	bExport			:BOOL;
-	sSVDXFilePath 	:T_MaxString ;//.svdx
-	sPathToNewCSV	:T_MaxString ;//.csv
+	svd 			:T_MaxString;//.svdx
+	target			:T_MaxString;//.csv
+	config			:T_MaxString;//.xml Configuration file created by export wizzard
+	Channellist		:T_MaxString;//Channel List (Names of the channels(s) separated with semicolon
+	start			:T_MaxString;//Starttime (As TwinCAT time stamp)
+	end				:T_MaxString;//Endtime (As TwimCAT time stamp	
 END_VAR
 VAR_OUTPUT
-	bBusy		:BOOL;
-	bError		:BOOL;
-	iErrorID	:UDINT;
+	bBusy			:BOOL;
+	bError			:BOOL;
+	iErrorID		:UDINT;
 END_VAR
 VAR
 	rtExport		:R_TRIG;
@@ -25,20 +29,50 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[
-rtExport(CLK:=bExport);
+      <ST><![CDATA[rtExport(CLK:=bExport);
 CASE eState OF 
 	IDEL:
 		bBusy		:=FALSE;
 		IF rtExport.Q THEN
 			bBusy		:=TRUE;
 			//'"svd=c:\Scope Project.svdx" target=c:\TestExport.csv silent'
-			sFormat:='"svd=%s" "target=%s" silent';
+			sFormat:='"svd=%s" "target=%s"';
+			
+			IF config<>'' THEN
+				sFormat:= CONCAT(sFormat,' "config=%s"');
+			ELSE
+				sFormat:= CONCAT(sFormat,'%s');
+			END_IF
+
+			IF Channellist<>'' THEN
+				sFormat:= CONCAT(sFormat,' "Channellist=%s"');
+			ELSE
+				sFormat:= CONCAT(sFormat,'%s');
+			END_IF
+			
+			IF start<>'' THEN
+				sFormat:= CONCAT(sFormat,' "start=%s"');
+			ELSE
+				sFormat:= CONCAT(sFormat,'%s');
+			END_IF			
+
+			IF end<>'' THEN
+				sFormat:= CONCAT(sFormat,' "end=%s"');
+			ELSE
+				sFormat:= CONCAT(sFormat,'%s');
+			END_IF					
+			
+			sFormat	:= CONCAT(sFormat,' silent');
 			
 			fbFormat(
 				pFormatString:=ADR(sFormat) , 
-				arg1		:=F_STRING(sSVDXFilePath) , 
-				arg2		:=F_STRING(sPathToNewCSV) , 
+				arg1		:=F_STRING(svd) , 
+				arg2		:=F_STRING(target) ,
+				arg3		:=F_STRING(config), 
+				arg4		:=F_STRING(Channellist), 
+				arg5		:=F_STRING(start), 
+				arg6		:=F_STRING(end), 				
+				arg7		:=, 				
 				pDstString	:=ADR(sCommand) , 
 				nDstSize	:=SIZEOF(sCommand) );
 				

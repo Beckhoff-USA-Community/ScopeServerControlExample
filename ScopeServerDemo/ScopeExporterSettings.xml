@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ExportConfiguration>
+  <ExportStartTime>0</ExportStartTime>
+  <ExportEndTime>0</ExportEndTime>
+  <Silent>False</Silent>
+  <IncludeAllChannels>True</IncludeAllChannels>
+  <IncludeAllImages>False</IncludeAllImages>
+  <Format_Properties>
+    <CSVProperties>
+      <DecimalMark>.</DecimalMark>
+      <Seperator>Comma</Seperator>
+      <ArraySeperator>Tab</ArraySeperator>
+      <ExcludeDoubleTimestamp>False</ExcludeDoubleTimestamp>
+      <HeaderKonfiguration>16777215</HeaderKonfiguration>
+      <SortChannels>False</SortChannels>
+      <ContainEOF>True</ContainEOF>
+      <IncludeTriggerInfos>False</IncludeTriggerInfos>
+      <FullTimeStamp>False</FullTimeStamp>
+      <IncludeMarkerTables>None</IncludeMarkerTables>
+      <MarkerTableOnlyIncludedChannels>True</MarkerTableOnlyIncludedChannels>
+      <MarkerTableOnlyIncludedMarker>True</MarkerTableOnlyIncludedMarker>
+      <ScaleValues>False</ScaleValues>
+    </CSVProperties>
+  </Format_Properties>
+</ExportConfiguration>
