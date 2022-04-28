@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <POU Name="FB_ExportScopeDataToCSV" Id="{d39ca1ac-6eac-4c50-b833-8978ee8dc99a}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_ExportScopeDataToCSV
+VAR_INPUT
+	sNetId			: STRING	:='';	
+	bExport			:BOOL;
+	sSVDXFilePath 	:T_MaxString ;//.svdx
+	sPathToNewCSV	:T_MaxString ;//.csv
+END_VAR
+VAR_OUTPUT
+	bBusy		:BOOL;
+	bError		:BOOL;
+	iErrorID	:UDINT;
+END_VAR
+VAR
+	rtExport		:R_TRIG;
+	fbStartExport	:NT_StartProcess;
+	
+	eState			:(IDEL,EXPORTING,ERROR);
+	
+    fbFormat   		: FB_FormatString2;
+    sFormat    		: T_MaxString ;
+	sCommand		: T_MaxString ;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+rtExport(CLK:=bExport);
+CASE eState OF 
+	IDEL:
+		bBusy		:=FALSE;
+		IF rtExport.Q THEN
+			bBusy		:=TRUE;
+			//'"svd=c:\Scope Project.svdx" target=c:\TestExport.csv silent'
+			sFormat:='"svd=%s" "target=%s" silent';
+			
+			fbFormat(
+				pFormatString:=ADR(sFormat) , 
+				arg1		:=F_STRING(sSVDXFilePath) , 
+				arg2		:=F_STRING(sPathToNewCSV) , 
+				pDstString	:=ADR(sCommand) , 
+				nDstSize	:=SIZEOF(sCommand) );
+				
+			IF NOT fbFormat.bError THEN
+				eState				:=EXPORTING;
+				fbStartExport.START	:=TRUE;
+			ELSE
+				bError		:=fbFormat.bError;
+				iErrorID	:=fbFormat.nErrId;
+				eState		:=ERROR;
+			END_IF
+			
+		END_IF
+	
+	EXPORTING:
+		IF NOT fbStartExport.BUSY THEN
+			fbStartExport.START	:=FALSE;
+			IF NOT fbStartExport.ERR THEN
+				eState		:=IDEL;
+			ELSE
+				bError		:=fbStartExport.ERR;
+				iErrorID	:=fbStartExport.ERRID;
+				eState		:=ERROR;				
+			END_IF
+		END_IF
+	
+	ERROR:
+		eState		:=IDEL;
+		
+END_CASE
+
+
+fbStartExport(
+    NETID		:= sNetId, 
+    PATHSTR		:= 'C:\TwinCAT\Functions\TE130X-Scope-View\TC3ScopeExportTool.exe', 
+    DIRNAME		:= 'C:\TwinCAT\Functions\TE130X-Scope-View', 
+    COMNDLINE	:= sCommand, 
+    START		:= , 
+    TMOUT		:= T#30S);]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

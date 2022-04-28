@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <POU Name="MAIN" Id="{4e6c4e24-5eb0-4835-befe-d965fbdc25e9}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM MAIN
+VAR
+	{attribute 'TcAnalytics'}	
+	Data				:FB_GenerateData;
+	
+	fbScopeServer		:FB_ScopeServerSample;
+	
+	xStartStopScope		:BOOL;
+	xScopeBusy			:BOOL;
+	xScopeError			:BOOL;
+	iScopeErrorID		:UDINT;
+	
+	
+	fbExportToCSV		:FB_ExportScopeDataToCSV;
+	xExport				:BOOL;
+	xExportBusy			:BOOL;
+	xExportError		:BOOL;
+	iExportErrorID		:UDINT;
+	
+	
+	//Example for listing files https://infosys.beckhoff.com/content/1033/tcplclib_tc2_utilities/35410571.html?id=3151343736833681439	
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[Data();
+
+
+fbScopeServer(
+	sNetId					:='' , 
+	bExternalTriggerEvent	:=xStartStopScope , 
+	sConfigFile				:= 'C:\Scope\Templates\TemplateForPLC.tcscopex', 
+	sSaveFile				:='C:\Scope\Records\Record1.svdx' , 
+	bBusy					=>xScopeBusy , 
+	bError					=>xScopeError, 
+	nErrorId				=>iScopeErrorID);
+	
+	
+fbExportToCSV(
+	sNetId					:='' , 
+	bExport					:=xExport , 
+	sSVDXFilePath			:=fbScopeServer.sSaveFile , 
+	sPathToNewCSV			:='C:\Scope\CSV\Record1.CSV' , 
+	bBusy					=>xExportBusy , 
+	bError					=>xExportError , 
+	iErrorID				=>iExportErrorID );	]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

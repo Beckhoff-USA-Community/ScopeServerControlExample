@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <POU Name="FB_ScopeServerSample" Id="{a7aa7f44-b345-4be7-9145-ed58810717a1}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_ScopeServerSample
+VAR_INPUT
+	sNetId					: STRING	:='';	
+    bExternalTriggerEvent	: BOOL 		:= FALSE; //Rising edge start recording, falling edge stop and save
+	sConfigFile				: STRING(80); //.tcscopex
+	sSaveFile				: STRING(80); //.svdx
+END_VAR
+VAR_OUTPUT
+    bBusy					: BOOL 		:= FALSE;
+    bError					: BOOL 		:= FALSE;
+    nErrorId				: UDINT 	:= 0;	
+END_VAR
+VAR
+
+    bDone					: BOOL 		:= FALSE;	
+
+    fbScopeServerControl	: FB_ScopeServerControl;
+    eReqState				: E_ScopeServerState := SCOPE_SERVER_IDLE;
+	
+    eState					: (IDLE,RECORDING,SAVING,DISCONNECTING,ERROR,RESETING);
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[CASE eState OF
+	IDLE:
+		bBusy	:=FALSE;
+		IF bExternalTriggerEvent THEN
+			bBusy			:= TRUE;
+	    	eReqState 		:= SCOPE_SERVER_START;
+	    	eState 			:= RECORDING;	
+		END_IF
+	
+	RECORDING:	
+		IF fbScopeServerControl.bDone THEN
+	    	IF NOT bExternalTriggerEvent THEN
+	    	    eReqState 		:= SCOPE_SERVER_SAVE;
+	    	    eState 			:= SAVING;
+	    	END_IF
+		ELSIF fbScopeServerControl.bError THEN
+			eState	:=ERROR;		
+		END_IF
+		
+	SAVING:
+	    IF fbScopeServerControl.bDone THEN
+	        eReqState 		:= SCOPE_SERVER_DISCONNECT;
+			eState			:= DISCONNECTING;
+		ELSIF fbScopeServerControl.bError THEN
+			eState	:=ERROR;		
+		END_IF
+		
+	DISCONNECTING:
+		IF fbScopeServerControl.bDone THEN
+	       eState := IDLE;
+		ELSIF fbScopeServerControl.bError THEN
+			eState	:=ERROR;				   
+	    END_IF		
+		
+	ERROR:
+		bBusy			:= FALSE;
+		IF NOT bExternalTriggerEvent THEN
+			bBusy			:= TRUE;
+			eReqState 		:= SCOPE_SERVER_RESET;
+			eState			:= DISCONNECTING;
+		END_IF
+		
+	RESETING:
+		IF fbScopeServerControl.bDone OR fbScopeServerControl.bError THEN
+	       	eReqState 		:= SCOPE_SERVER_IDLE;
+			eState			:= IDLE; 
+	    END_IF		
+		
+END_CASE
+
+
+fbScopeServerControl( sNetId		:= '',
+                      eReqState		:= eReqState,
+                      sConfigFile	:= sConfigFile,
+                      sSaveFile		:= sSaveFile,
+                      tTimeout		:= T#5S,
+                      bBusy			=>,
+                      bDone			=>bDone,
+                      bError		=>bError,
+                      nErrorId		=>nErrorId);]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>
