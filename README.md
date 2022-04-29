@@ -1,7 +1,11 @@
 # About This Repository
 
--- UPDATE THIS SECTION -- 
-This Repository is a template meant for basing new public repos off of. A new GitHub repo can be based off this template to automatically import the same TwinCAT GitIgnore and README file templates. After importing, replace this text to match the desired repo descriptions. 
+Sample PLC code on how to use FB_ScopeServerControl to start and stop a recording from the PLC (Requries TF3300).
+Data is then saved as a .svdx file. 
+
+With the .svdx file, it can be opened up and viewed inside of scope view.
+
+In this example, there is also an example function block on how to call the scope export tool from the PLC, and covert the recorded data in the .svdx file into a .csv file. 
 
 This sample is created by [Beckhoff Automation LLC.](https://www.beckhoff.com/en-us/), and is provided as-is under the Zero-Clause BSD license.
 
@@ -10,13 +14,12 @@ This sample is created by [Beckhoff Automation LLC.](https://www.beckhoff.com/en
 Should you have any questions regarding the provided sample code, please contact your local Beckhoff support team. Contact information can be found on the official Beckhoff website at https://www.beckhoff.com/en-us/support/.
 
 # Further Information
-
--- UPDATE THIS SECTION -- 
-Further Information on -- THIS REPO TOPIC -- can be found at the [Beckhoff Infosys](https://infosys.beckhof.com) under the [REPO TOPIC](https://infosys.beckhoff.com/content/1033/ethercatsystem/2469077771.html?id=8287668039751154112)
+https://infosys.beckhoff.com/content/1033/tcplclib_tc2_utilities/35059339.html?id=146323714276683940
+https://infosys.beckhoff.com/content/1033/te13xx_tc3_scopeview/1022949131.html?id=1090492099338523905
 
 ## Requirements
 
 The following components must be installed to run sample code:
 
 - [TE1000 TwinCAT 3 Engineering](https://www.beckhoff.com/en-en/products/automation/twincat/te1xxx-twincat-3-engineering/te1000.html) version 3.1.4024.0 or higher
-- -- UPDATE THIS SECTION --
+TF3300 on the target system
