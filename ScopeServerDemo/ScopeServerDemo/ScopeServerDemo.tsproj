@@ -5,12 +5,9 @@
 			<Settings MaxCpus="4" NonWinCpus="2">
 				<Cpu CpuId="3"/>
 			</Settings>
-			<Licenses CacheOrCheckLicensesOnStartup="true">
+			<Licenses>
 				<Target>
-					<ManualSelect>{27326EE5-AB30-4084-B15B-8CCA96CCBF0B}</ManualSelect>
-					<ManualSelect>{99A3CF49-FFBF-49D4-BA30-F4C0593B5161}</ManualSelect>
 					<ManualSelect>{3DDCAB25-BF0E-412C-A721-DC77C1B8099C}</ManualSelect>
-					<LicenseDevice DongleHardwareId="2" DongleDevice="#x71010001" DongleLevel="70" DongleSystemId="{256E8B65-A19F-8909-7280-9EA2AF0183D4}"/>
 				</Target>
 			</Licenses>
 			<Tasks>
