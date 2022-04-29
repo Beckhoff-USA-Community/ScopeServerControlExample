@@ -10,7 +10,7 @@
       <Children>
         <Node>
           <Title>DataPool</Title>
-          <Expanded>False</Expanded>
+          <Expanded>True</Expanded>
           <FileName></FileName>
           <Children>
             <Node>
@@ -45,6 +45,12 @@
               <Children>
                 <Node>
                   <Title>Sinus_Fast</Title>
+                  <Expanded>False</Expanded>
+                  <FileName></FileName>
+                  <Children />
+                </Node>
+                <Node>
+                  <Title>Sinus_SqFast</Title>
                   <Expanded>False</Expanded>
                   <FileName></FileName>
                   <Children />
