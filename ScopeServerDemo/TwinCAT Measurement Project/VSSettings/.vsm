@@ -6,27 +6,27 @@
     <Node>
       <Title>TemplateForPLC</Title>
       <Expanded>True</Expanded>
-      <FileName>C:\Users\Matt\source\repos\ScopeServerControlExample\ScopeServerDemo\TwinCAT Measurement Project\TemplateForPLC.tcscopex</FileName>
+      <FileName>C:\Users\MattK\Source\Repos\ScopeServerControlExample\ScopeServerDemo\TwinCAT Measurement Project\TemplateForPLC.tcscopex</FileName>
       <Children>
         <Node>
           <Title>DataPool</Title>
-          <Expanded>False</Expanded>
+          <Expanded>True</Expanded>
           <FileName></FileName>
           <Children>
             <Node>
-              <Title>bBlue</Title>
+              <Title>fbBlink.OUT</Title>
               <Expanded>False</Expanded>
               <FileName></FileName>
               <Children />
             </Node>
             <Node>
-              <Title>Sinus_Fast</Title>
+              <Title>SawTooth.OUT</Title>
               <Expanded>False</Expanded>
               <FileName></FileName>
               <Children />
             </Node>
             <Node>
-              <Title>Sinus_SqFast</Title>
+              <Title>Sinus.OUT</Title>
               <Expanded>False</Expanded>
               <FileName></FileName>
               <Children />
@@ -44,13 +44,13 @@
               <FileName></FileName>
               <Children>
                 <Node>
-                  <Title>Sinus_Fast</Title>
+                  <Title>Sinus.OUT</Title>
                   <Expanded>False</Expanded>
                   <FileName></FileName>
                   <Children />
                 </Node>
                 <Node>
-                  <Title>Sinus_SqFast</Title>
+                  <Title>SawTooth.OUT</Title>
                   <Expanded>False</Expanded>
                   <FileName></FileName>
                   <Children />
@@ -59,11 +59,11 @@
             </Node>
             <Node>
               <Title>Digital</Title>
-              <Expanded>False</Expanded>
+              <Expanded>True</Expanded>
               <FileName></FileName>
               <Children>
                 <Node>
-                  <Title>bBlue</Title>
+                  <Title>fbBlink.OUT</Title>
                   <Expanded>False</Expanded>
                   <FileName></FileName>
                   <Children />

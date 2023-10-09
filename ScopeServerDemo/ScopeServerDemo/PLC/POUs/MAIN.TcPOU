@@ -1,9 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <POU Name="MAIN" Id="{4e6c4e24-5eb0-4835-befe-d965fbdc25e9}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
-	Data				:FB_GenerateData;
+	fbBlink				:BLINK;
+	Sinus				:GEN;
+	SawTooth			:GEN;
+	
 	
 	fbScopeServer		:FB_ScopeServerSample;
 	
@@ -25,7 +28,9 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[Data();
+      <ST><![CDATA[fbBlink(ENABLE:=TRUE , TIMELOW:=T#200MS , TIMEHIGH:=T#400MS);
+Sinus(MODE:=GEN_MODE.SINUS , BASE:=TRUE , PERIOD:=T#1S , AMPLITUDE:=10000 );
+SawTooth(MODE:=GEN_MODE.SAWTOOTH_RISE , BASE:=TRUE , PERIOD:=T#1S , AMPLITUDE:=10000 );
 
 
 
@@ -55,5 +60,12 @@ fbExportToCSV(
 	bError					=>xExportError , 
 	iErrorID				=>iExportErrorID );	]]></ST>
     </Implementation>
+    <LineIds Name="MAIN">
+      <LineId Id="3" Count="0" />
+      <LineId Id="57" Count="0" />
+      <LineId Id="65" Count="0" />
+      <LineId Id="4" Count="26" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
   </POU>
 </TcPlcObject>
