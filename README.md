@@ -7,6 +7,8 @@ With the .svdx file, it can be opened up and viewed inside of scope view.
 
 In this example, there is also an example function block on how to call the scope export tool from the PLC, and covert the recorded data in the .svdx file into a .csv file. 
 
+A very capable and robust alternative to this is to use the [TwinCAT Analytics Logger](https://infosys.beckhoff.com/content/1033/tf3500_tc3_analytics_logger/7666756875.html?id=3699947303829975394). 
+
 This sample is created by [Beckhoff Automation LLC.](https://www.beckhoff.com/en-us/), and is provided as-is under the Zero-Clause BSD license.
 
 # How to get support
